@@ -1,11 +1,11 @@
-"""
-Integration test suite for the unified /api/v1/analyze multimodal pipeline endpoint.
-"""
-
+import io
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from fastapi.testclient import TestClient
+import nibabel as nib
+import numpy as np
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
@@ -125,6 +125,55 @@ class TestAnalyzeEndpoint(unittest.TestCase):
         events = t_data["events"]
         ai_events = [e for e in events if "Multimodal" in e.get("title", "") or "Multimodal" in e.get("category_name", "")]
         self.assertGreater(len(ai_events), 0)
+
+    def test_04_multipart_form_data_with_ct_file(self):
+        """Verify POST /api/v1/analyze with multipart form data and uploaded NIfTI CT volume."""
+        vol_data = np.full((16, 16, 16), -50.0, dtype=np.float32)
+        vol_data[6:10, 6:10, 6:10] = 120.0  # Hyperenhancing lesion focus
+        affine = np.eye(4, dtype=np.float32)
+        nii = nib.Nifti1Image(vol_data, affine)
+
+        with tempfile.NamedTemporaryFile(suffix=".nii.gz", delete=False) as tmp:
+            nib.save(nii, tmp.name)
+            tmp_path = Path(tmp.name)
+
+        try:
+            with open(tmp_path, "rb") as f:
+                ct_bytes = f.read()
+
+            data = {
+                "patient_id": "PT-FORM-99",
+                "name": "Sarah Connor",
+                "afp": "320.0",
+                "albumin": "3.8",
+                "bilirubin": "1.2",
+                "alt": "42.0",
+                "ast": "48.0",
+                "lesion_diameter_mm": "22.0",
+            }
+            files = {
+                "ct_file": ("patient_scan.nii.gz", ct_bytes, "application/gzip")
+            }
+
+            resp = self.client.post("/api/v1/analyze", data=data, files=files)
+            self.assertEqual(resp.status_code, 200)
+            body = resp.json()
+
+            self.assertEqual(body["status"], "success")
+            self.assertEqual(body["patient_id"], "PT-FORM-99")
+            self.assertIn("metrics", body)
+            self.assertEqual(body["metrics"]["afp"], 320.0)
+            self.assertIn("stage_predictions", body)
+            self.assertIn("bclc_stage", body["stage_predictions"])
+            self.assertIn("hazard_scores", body)
+            self.assertIn("hazard_ratio", body["hazard_scores"])
+            self.assertIn("shap_feature_rankings", body)
+            self.assertIn("clinical_report_text", body)
+            self.assertGreater(len(body["clinical_report_text"]), 50)
+            self.assertIn("modules", body)
+            self.assertEqual(body["modules"]["module1_preprocessing"]["status"], "completed")
+        finally:
+            tmp_path.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

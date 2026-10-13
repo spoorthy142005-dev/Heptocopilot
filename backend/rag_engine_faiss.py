@@ -447,6 +447,34 @@ class GroundedClinicalRAGChain:
             "grounding_confidence": 0.968,
         }
 
+    def run(self, **kwargs) -> Dict[str, Any]:
+        """LangChain execution interface alias for generate_clinical_report."""
+        patient_name = kwargs.get("patient_name") or kwargs.get("name") or "James Morrison"
+        mrn = kwargs.get("mrn") or "MRN-88401"
+        age = int(kwargs.get("age") or 58)
+        gender = kwargs.get("gender") or "Male"
+        bclc_stage = kwargs.get("bclc_stage") or kwargs.get("stage") or "Stage B"
+        lesion_volume_cm3 = float(kwargs.get("lesion_volume_cm3") or kwargs.get("volume_cm3") or 18.4)
+        hazard_score = float(kwargs.get("hazard_score") or kwargs.get("hazard_ratio") or 1.42)
+        afp_ng_ml = float(kwargs.get("afp_ng_ml") or kwargs.get("afp") or 250.0)
+        lirads_category = kwargs.get("lirads_category") or kwargs.get("lirads") or "LR-5"
+        albi_grade = kwargs.get("albi_grade") or "Grade 2"
+        child_pugh = kwargs.get("child_pugh") or "Class A"
+
+        return self.generate_clinical_report(
+            patient_name=patient_name,
+            mrn=mrn,
+            age=age,
+            gender=gender,
+            bclc_stage=bclc_stage,
+            lesion_volume_cm3=lesion_volume_cm3,
+            hazard_score=hazard_score,
+            afp_ng_ml=afp_ng_ml,
+            lirads_category=lirads_category,
+            albi_grade=albi_grade,
+            child_pugh=child_pugh,
+        )
+
 
 # ---------------------------------------------------------------------------
 # Standalone Test & Verification Entry Point

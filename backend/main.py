@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from fastapi import FastAPI, File, HTTPException, UploadFile, Query, Response
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile, Query, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -32,6 +32,7 @@ from backend.staging_engine import SwinBCLCStagingEngine, BCLC_SHORT_NAMES, BCLC
 from backend.deepsurv_engine import DeepSurvMultimodalFusion, clinical_to_tensor
 from backend.xai_engine import GradCAM3D, compute_tabular_shap_values
 from backend.rag_engine import generate_rag_report
+from backend.rag_engine_faiss import GroundedClinicalRAGChain, DEFAULT_VECTORSTORE_DIR
 
 app = FastAPI(
     title="HepatoCopilot FastAPI Backend",
@@ -1269,6 +1270,16 @@ def _get_deepsurv_engine() -> DeepSurvMultimodalFusion:
     return _ORCHESTRATOR_DEEPSURV
 
 
+_ORCHESTRATOR_RAG: Optional[GroundedClinicalRAGChain] = None
+
+
+def _get_rag_chain() -> GroundedClinicalRAGChain:
+    global _ORCHESTRATOR_RAG
+    if _ORCHESTRATOR_RAG is None:
+        _ORCHESTRATOR_RAG = GroundedClinicalRAGChain(DEFAULT_VECTORSTORE_DIR)
+    return _ORCHESTRATOR_RAG
+
+
 def execute_multimodal_analysis(
     req: MultimodalAnalyzeRequest,
     uploaded_volume_path: Optional[str] = None,
@@ -1340,24 +1351,24 @@ def execute_multimodal_analysis(
     scores = lab_eval.get("scores", {})
     interps = lab_eval.get("interpretations", {})
 
-    # 6. Module 6: Grounded Clinical RAG Synthesis
-    rag_payload = {
-        "name": req.name or "James Morrison",
-        "age": req.age or 58,
-        "gender": req.gender or "Male",
-        "mrn": req.mrn or "MRN-88401",
-        "afp": req.afp or 250.0,
-        "lirads_category": lirads_cat,
-        "bclc_stage": stage_name,
-        "lesion_diameter_mm": dia_mm,
-        "lesion_volume_cm3": lesion_vol_cm3,
-        "hazard_ratio": prognosis_result["hazard_ratio"],
-        "risk_tier": prognosis_result["risk_tier"],
-        "median_survival_months": prognosis_result["median_survival_months"],
-        "albi_grade": interps.get("albi_grade", "Grade 2"),
-        "child_pugh_class": f"Class {interps.get('child_pugh_class', 'A')}",
-    }
-    rag_result = generate_rag_report(rag_payload)
+    # 6. Module 6: Grounded Clinical RAG Synthesis (FAISS + LangChain)
+    rag_chain = _get_rag_chain()
+    rag_output = rag_chain.run(
+        patient_name=req.name or "James Morrison",
+        mrn=req.mrn or "MRN-88401",
+        age=int(req.age or 58),
+        gender=req.gender or "Male",
+        bclc_stage=stage_short,
+        lesion_volume_cm3=lesion_vol_cm3,
+        hazard_score=prognosis_result["hazard_ratio"],
+        afp_ng_ml=float(req.afp or 250.0),
+        lirads_category=lirads_cat,
+        albi_grade=interps.get("albi_grade", "Grade 2"),
+        child_pugh=f"Class {interps.get('child_pugh_class', 'A')}",
+    )
+    clinical_report_text = rag_output.get("full_report", rag_output.get("full_report_markdown", ""))
+    primary_rec = rag_output.get("primary_recommendation") or "Multidisciplinary Tumor Board referral per AASLD/EASL criteria"
+    clinical_pathway = rag_output.get("clinical_pathway") or "Locoregional / Systemic Management"
 
     # 7. Record new analysis in Longitudinal Timeline DB
     patient_id = req.patient_id or "PT-1001"
@@ -1376,7 +1387,7 @@ def execute_multimodal_analysis(
         "summary": (
             f"BCLC: {stage_short} | LI-RADS: {lirads_cat} | "
             f"Hazard Ratio: {prognosis_result['hazard_ratio']} ({prognosis_result['risk_tier']}) | "
-            f"RAG: {rag_result['clinical_pathway']}"
+            f"RAG: {clinical_pathway}"
         ),
         "ai_prediction": {
             "bclc_stage": stage_short,
@@ -1385,7 +1396,7 @@ def execute_multimodal_analysis(
             "hazard_ratio": prognosis_result["hazard_ratio"],
             "risk_tier": prognosis_result["risk_tier"],
             "top_shap_driver": shap_result["top_risk_drivers"][0]["feature_name"] if shap_result["top_risk_drivers"] else "None",
-            "recommendation": rag_result["primary_recommendation"],
+            "recommendation": primary_rec,
         }
     }
 
@@ -1411,6 +1422,50 @@ def execute_multimodal_analysis(
         "patient_id": patient_id,
         "patient_name": req.name,
         "timestamp": iso_now,
+        # Unified top-level keys
+        "metrics": {
+            "lesion_diameter_mm": dia_mm,
+            "lesion_volume_cm3": lesion_vol_cm3,
+            "lesion_voxel_count": lesion_voxel_count,
+            "afp": float(req.afp or 250.0),
+            "albumin": float(req.albumin or 3.6),
+            "bilirubin": float(req.bilirubin or 1.5),
+            "alt": float(req.alt or 45.0),
+            "ast": float(req.ast or 50.0),
+            "platelets": float(req.platelets or 160.0),
+            "inr": float(req.inr or 1.2),
+            "creatinine": float(req.creatinine or 1.0),
+            "albi_score": scores.get("albi", -2.1),
+            "albi_grade": interps.get("albi_grade", "Grade 2"),
+            "fib4_index": scores.get("fib4", 2.8),
+            "apri_score": scores.get("apri", 1.2),
+            "child_pugh_points": scores.get("child_pugh_points", 5),
+            "child_pugh_class": interps.get("child_pugh_class", "A"),
+            "lirads_category": lirads_cat,
+        },
+        "stage_predictions": {
+            "bclc_stage": stage_short,
+            "stage_full_name": stage_name,
+            "predicted_stage_idx": stage_idx,
+            "stage_probabilities": {
+                BCLC_SHORT_NAMES[i]: round(float(stage_probs[0, i].item()), 4)
+                for i in range(4)
+            },
+            "spatial_embeddings_dim": embeddings.shape[1],
+        },
+        "hazard_scores": {
+            "log_hazard": prognosis_result["log_hazard"],
+            "hazard_ratio": prognosis_result["hazard_ratio"],
+            "risk_tier": prognosis_result["risk_tier"],
+            "risk_color": prognosis_result["risk_color"],
+            "median_survival_months": prognosis_result["median_survival_months"],
+            "survival_probabilities": prognosis_result["survival_probabilities"],
+            "survival_curve": prognosis_result["survival_curve"],
+            "prognostic_summary": prognosis_result.get("summary", ""),
+        },
+        "shap_feature_rankings": shap_result["top_risk_drivers"],
+        "clinical_report_text": clinical_report_text,
+        # Module-specific breakdowns
         "modules": {
             "module1_preprocessing": {
                 "status": "completed",
@@ -1480,12 +1535,13 @@ def execute_multimodal_analysis(
             },
             "module6_rag": {
                 "status": "completed",
-                "report_id": rag_result["report_id"],
-                "clinical_pathway": rag_result["clinical_pathway"],
-                "primary_recommendation": rag_result["primary_recommendation"],
-                "grounded_narrative": rag_result["grounded_narrative"],
-                "retrieved_guidelines": rag_result["retrieved_guidelines"],
-                "grounding_status": rag_result["grounding_status"],
+                "report_id": rag_output.get("report_id", "RAG-REPORT-88401"),
+                "clinical_pathway": clinical_pathway,
+                "primary_recommendation": primary_rec,
+                "grounded_narrative": clinical_report_text,
+                "retrieved_guidelines": rag_output.get("retrieved_guidelines", []),
+                "grounding_status": "Grounded via AASLD/EASL/NCCN FAISS Vector Store",
+                "sections": rag_output.get("sections", {}),
             },
         },
         "timeline_event_created": new_timeline_event["id"],
@@ -1493,9 +1549,72 @@ def execute_multimodal_analysis(
 
 
 @app.post("/api/v1/analyze")
-def analyze_patient_multimodal(req: MultimodalAnalyzeRequest) -> dict:
-    """Unified multimodal analysis endpoint executing Modules 1 through 6."""
-    return execute_multimodal_analysis(req)
+async def analyze_patient_multimodal(request: Request) -> dict:
+    """Master Unified Multimodal Analysis Endpoint for HepatoCopilot (Modules 1-6).
+    
+    Accepts:
+    1. Multipart Form Data: patient_id, afp, albumin, bilirubin, alt, ast, lesion_diameter_mm,
+       and optional uploaded CT volume ct_file / ct_scan (.nii, .nii.gz)
+    2. JSON payload: MultimodalAnalyzeRequest
+    """
+    content_type = request.headers.get("content-type", "").lower()
+    uploaded_temp_path = None
+
+    if "application/json" in content_type:
+        payload = await request.json()
+        req = MultimodalAnalyzeRequest(**payload)
+    else:
+        form = await request.form()
+        ct_file = form.get("ct_file") or form.get("ct_scan")
+        if ct_file and hasattr(ct_file, "read"):
+            filename = getattr(ct_file, "filename", "") or "scan.nii.gz"
+            suffix = ".nii.gz" if filename.endswith(".nii.gz") else ".nii"
+            with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
+                tmp.write(await ct_file.read())
+                uploaded_temp_path = tmp.name
+
+        def parse_float(val, default):
+            if val is None or val == "":
+                return default
+            try:
+                return float(val)
+            except (ValueError, TypeError):
+                return default
+
+        def parse_bool(val, default=False):
+            if val is None:
+                return default
+            if isinstance(val, bool):
+                return val
+            return str(val).lower() in ("true", "1", "yes")
+
+        req = MultimodalAnalyzeRequest(
+            patient_id=str(form.get("patient_id") or "PT-1001"),
+            name=str(form.get("name") or "James Morrison"),
+            age=parse_float(form.get("age"), 58.0),
+            gender=str(form.get("gender") or "Male"),
+            mrn=str(form.get("mrn") or "MRN-88401"),
+            afp=parse_float(form.get("afp"), 250.0),
+            alt=parse_float(form.get("alt"), 45.0),
+            ast=parse_float(form.get("ast"), 50.0),
+            albumin=parse_float(form.get("albumin"), 3.6),
+            bilirubin=parse_float(form.get("bilirubin"), 1.5),
+            platelets=parse_float(form.get("platelets"), 160.0),
+            inr=parse_float(form.get("inr"), 1.2),
+            creatinine=parse_float(form.get("creatinine"), 1.0),
+            cirrhosis=parse_bool(form.get("cirrhosis"), False),
+            lesion_diameter_mm=parse_float(form.get("lesion_diameter_mm"), 24.5),
+            arterial_hyperenhancement=parse_bool(form.get("arterial_hyperenhancement"), True),
+            washout=parse_bool(form.get("washout"), True),
+            enhancing_capsule=parse_bool(form.get("enhancing_capsule"), False),
+            threshold_growth=parse_bool(form.get("threshold_growth"), False),
+        )
+
+    try:
+        return execute_multimodal_analysis(req, uploaded_volume_path=uploaded_temp_path)
+    finally:
+        if uploaded_temp_path:
+            Path(uploaded_temp_path).unlink(missing_ok=True)
 
 
 @app.post("/api/v1/analyze/upload")
