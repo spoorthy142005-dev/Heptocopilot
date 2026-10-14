@@ -247,7 +247,9 @@ export default function App({ initialUser, onLogout }) {
       {/* Sidebar Navigation */}
       <aside className="sidebar">
         <div className="brand">
-          <div className="brand-mark"><Activity size={20} /></div>
+          <div className="brand-mark" style={{ background: 'transparent', boxShadow: 'none' }}>
+            <img src="/hepato_copilot_logo_transparent.png" alt="HepatoCopilot Logo" style={{ height: '30px', width: 'auto', objectFit: 'contain' }} />
+          </div>
           <span>Hepato<span>Copilot</span></span>
         </div>
         <div className="workspace-label">CLINICAL WORKSPACE</div>
@@ -2665,8 +2667,8 @@ function LoginPage({ onLogin }) {
       {/* Top Header Logo */}
       <header className="login-top-header">
         <div className="brand login-brand-header">
-          <div className="brand-mark-glowing">
-            <Activity size={22} />
+          <div className="brand-logo-wrap" style={{ marginRight: '10px' }}>
+            <img src="/hepato_copilot_logo_transparent.png" alt="HepatoCopilot Logo" style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span className="brand-text">Hepato<span className="cyan-highlight">Copilot</span></span>

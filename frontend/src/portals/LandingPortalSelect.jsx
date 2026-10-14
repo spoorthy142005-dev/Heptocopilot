@@ -15,8 +15,12 @@ export default function LandingPortalSelect({ onNavigate }) {
       {/* Top Brand Header */}
       <header className="landing-header">
         <div className="landing-brand">
-          <div className="brand-mark-glowing">
-            <Activity size={24} />
+          <div className="brand-logo-wrap">
+            <img 
+              src="/hepato_copilot_logo_transparent.png" 
+              alt="HepatoCopilot Logo" 
+              className="brand-logo-img" 
+            />
           </div>
           <div className="brand-titles">
             <span className="brand-text">Hepato<span className="green-highlight">Copilot</span></span>
