@@ -2478,7 +2478,7 @@ button {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 4px;
+  gap: 10px;
 }
 
 .landing-brand .brand-text {
@@ -2486,8 +2486,9 @@ button {
   font-size: 24px;
   font-weight: 850;
   color: #0f172a;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.02em;
+  display: block;
 }
 
 .landing-brand .green-highlight,
