@@ -19,8 +19,11 @@ export default function LandingPortalSelect({ onNavigate }) {
             <Activity size={24} />
           </div>
           <div className="brand-titles">
-            <span className="brand-text">Hepato<span className="cyan-highlight">Copilot</span></span>
-            <span className="brand-subtext">Clinical Intelligence System</span>
+            <span className="brand-text">Hepato<span className="green-highlight">Copilot</span></span>
+            <div className="brand-subtext-badge">
+              <span className="subtext-pulse-dot" />
+              <span>Clinical Intelligence System</span>
+            </div>
           </div>
         </div>
 
