@@ -1,32 +1,32 @@
 /* ── HepatoCopilot Clinical Intelligence Dashboard Stylesheet ─────────────────── */
 
 :root {
-  --bg-dark: #090d16;
-  --bg-card: #111827;
-  --bg-card-hover: #1f293d;
-  --bg-sidebar: #0d1322;
-  --border-color: #1f293d;
-  --border-light: #2e3d59;
+  --bg-dark: #120924;
+  --bg-card: rgba(28, 14, 52, 0.75);
+  --bg-card-hover: rgba(42, 21, 76, 0.88);
+  --bg-sidebar: rgba(18, 9, 34, 0.92);
+  --border-color: rgba(56, 189, 248, 0.2);
+  --border-light: rgba(16, 185, 129, 0.28);
   
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --text-dim: #6b7280;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-dim: #94a3b8;
   
-  --accent-blue: #3b82f6;
-  --accent-cyan: #06b6d4;
-  --accent-purple: #8b5cf6;
+  --accent-blue: #38bdf8;
+  --accent-cyan: #10b981;
+  --accent-purple: #c084fc;
   
   --risk-high: #f43f5e;
-  --risk-high-bg: rgba(244, 63, 94, 0.12);
-  --risk-high-border: rgba(244, 63, 94, 0.3);
+  --risk-high-bg: rgba(244, 63, 94, 0.15);
+  --risk-high-border: rgba(244, 63, 94, 0.35);
   
   --risk-mod: #f59e0b;
-  --risk-mod-bg: rgba(245, 158, 11, 0.12);
-  --risk-mod-border: rgba(245, 158, 11, 0.3);
+  --risk-mod-bg: rgba(245, 158, 11, 0.15);
+  --risk-mod-border: rgba(245, 158, 11, 0.35);
   
   --risk-low: #10b981;
-  --risk-low-bg: rgba(16, 185, 129, 0.12);
-  --risk-low-border: rgba(16, 185, 129, 0.3);
+  --risk-low-bg: rgba(16, 185, 129, 0.16);
+  --risk-low-border: rgba(16, 185, 129, 0.38);
 
   --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
@@ -793,17 +793,59 @@ button {
 .app-shell {
   display: flex;
   min-height: 100vh;
-  background: var(--bg-dark);
+  position: relative;
+  overflow-x: hidden;
+  background: 
+    radial-gradient(circle at 12% 14%, rgba(56, 189, 248, 0.24) 0%, transparent 45%),
+    radial-gradient(circle at 88% 18%, rgba(16, 185, 129, 0.24) 0%, transparent 45%),
+    radial-gradient(circle at 50% 65%, rgba(5, 150, 105, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 22% 85%, rgba(192, 132, 252, 0.22) 0%, transparent 45%),
+    linear-gradient(135deg, #0e071c 0%, #150a29 25%, #1e0e38 50%, #150926 75%, #0b0516 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+}
+
+.app-shell::before {
+  content: '';
+  position: fixed;
+  top: -120px;
+  left: -100px;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(56, 189, 248, 0.05) 55%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(70px);
+}
+
+.app-shell::after {
+  content: '';
+  position: fixed;
+  bottom: -120px;
+  right: -100px;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.24) 0%, rgba(5, 150, 105, 0.05) 55%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(70px);
 }
 
 .sidebar {
-  background: var(--bg-sidebar);
-  border-right: 1px solid var(--border-color);
+  background: rgba(18, 9, 34, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(56, 189, 248, 0.18);
   width: 240px;
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .workspace-label {
@@ -821,7 +863,7 @@ button {
 
 .nav-item {
   height: 42px;
-  border: 0;
+  border: 1px solid transparent;
   background: transparent;
   color: var(--text-muted);
   display: flex;
@@ -836,25 +878,28 @@ button {
 }
 
 .nav-item:hover {
-  background: var(--bg-card-hover);
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.25);
   color: var(--text-main);
 }
 
 .nav-item.active {
-  background: rgba(59, 130, 246, 0.15);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.22) 0%, rgba(16, 185, 129, 0.18) 100%);
   color: #fff;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.18);
 }
 
 .nav-item.active svg {
-  color: var(--accent-cyan);
+  color: #38bdf8;
 }
 
 .nav-item b {
   margin-left: auto;
   font-size: 11px;
   background: var(--accent-blue);
-  color: #fff;
+  color: #0f172a;
+  font-weight: 700;
   padding: 2px 7px;
   border-radius: 10px;
 }
@@ -911,12 +956,16 @@ button {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .topbar {
   height: 68px;
-  background: var(--bg-sidebar);
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(18, 9, 34, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.16);
   display: flex;
   align-items: center;
   padding: 0 36px;
@@ -1065,14 +1114,17 @@ button {
 }
 
 .alert-banner {
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(16, 185, 129, 0.1) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  padding: 12px 18px;
+  padding: 14px 20px;
   gap: 12px;
   margin-bottom: 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);
 }
 
 .alert-icon {
@@ -1111,10 +1163,19 @@ button {
 }
 
 .metric-card, .panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: rgba(28, 14, 52, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), 0 0 1px 1px rgba(16, 185, 129, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metric-card:hover, .panel:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), 0 0 18px rgba(16, 185, 129, 0.16);
+  transform: translateY(-2px);
 }
 
 .metric-card {
@@ -1289,9 +1350,10 @@ button {
   display: grid;
   place-items: center;
   margin: 12px 0 8px;
-  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 60%, var(--bg-card) 100%);
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
+  background: radial-gradient(circle at 50% 50%, #261545 0%, #170c2d 65%, #0f071e 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  box-shadow: inset 0 0 35px rgba(56, 189, 248, 0.06), inset 0 0 25px rgba(16, 185, 129, 0.06);
   overflow: hidden;
   position: relative;
 }
@@ -1309,8 +1371,8 @@ button {
 }
 
 .toggle-chip {
-  border: 1px solid var(--border-color);
-  background: var(--bg-dark);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: rgba(18, 9, 34, 0.75);
   color: var(--text-muted);
   font-size: 11px;
   padding: 6px 12px;
@@ -1318,10 +1380,17 @@ button {
   transition: all 0.15s ease;
 }
 
+.toggle-chip:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #fff;
+}
+
 .toggle-chip.active {
-  background: rgba(59, 130, 246, 0.2);
-  color: var(--accent-cyan);
-  border-color: rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(16, 185, 129, 0.2) 100%);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
   font-weight: 600;
 }
 

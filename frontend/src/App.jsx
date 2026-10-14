@@ -430,13 +430,19 @@ function OverviewPage({ patients, range, setRange, onSelect, onNav, onNotice, on
               <div className="grid-lines"><i /><i /><i /><i /><i /></div>
               <svg viewBox="0 0 700 210" preserveAspectRatio="none" role="img" aria-label="Prediction activity chart">
                 <defs>
+                  <linearGradient id="chartStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#38bdf8" />
+                    <stop offset="60%" stopColor="#10b981" />
+                    <stop offset="100%" stopColor="#38bdf8" />
+                  </linearGradient>
                   <linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0" stopColor="#06b6d4" stopOpacity="0.3" />
-                    <stop offset="1" stopColor="#06b6d4" stopOpacity="0.0" />
+                    <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
+                    <stop offset="50%" stopColor="#10b981" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="#120924" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
                 <path d="M0 156 C35 148 55 128 90 137 S145 161 178 122 S228 105 258 124 S300 144 342 84 S390 90 420 101 S462 120 495 74 S535 58 560 81 S620 94 650 41 S682 59 700 32 V210 H0 Z" fill="url(#chartFill)" />
-                <path d="M0 156 C35 148 55 128 90 137 S145 161 178 122 S228 105 258 124 S300 144 342 84 S390 90 420 101 S462 120 495 74 S535 58 560 81 S620 94 650 41 S682 59 700 32" fill="none" stroke="#06b6d4" strokeWidth="3" strokeLinecap="round" />
+                <path d="M0 156 C35 148 55 128 90 137 S145 161 178 122 S228 105 258 124 S300 144 342 84 S390 90 420 101 S462 120 495 74 S535 58 560 81 S620 94 650 41 S682 59 700 32" fill="none" stroke="url(#chartStroke)" strokeWidth="3.5" strokeLinecap="round" />
               </svg>
               <div className="chart-labels">
                 <span>Aug 25</span><span>Aug 26</span><span>Aug 27</span>
