@@ -4,6 +4,14 @@ import { Activity, Stethoscope, Building2, FlaskConical, ArrowRight, ShieldCheck
 export default function LandingPortalSelect({ onNavigate }) {
   return (
     <div className="landing-portal-shell">
+      {/* Ambient Pastel Animated Glow Mesh Orbs */}
+      <div className="ambient-pastel-mesh" aria-hidden="true">
+        <div className="pastel-orb orb-purple" />
+        <div className="pastel-orb orb-white" />
+        <div className="pastel-orb orb-pink" />
+        <div className="pastel-orb orb-lavender" />
+      </div>
+
       {/* Top Brand Header */}
       <header className="landing-header">
         <div className="landing-brand">

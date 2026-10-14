@@ -40,7 +40,14 @@
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-dark);
+  background: 
+    radial-gradient(ellipse 75% 55% at 50% -5%, rgba(243, 232, 255, 0.95), transparent 70%),
+    radial-gradient(circle at 8% 25%, rgba(253, 230, 248, 0.9), transparent 45%),
+    radial-gradient(circle at 92% 25%, rgba(237, 233, 254, 0.9), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(254, 215, 239, 0.75), transparent 45%),
+    radial-gradient(circle at 18% 80%, rgba(233, 213, 255, 0.75), transparent 45%),
+    linear-gradient(135deg, #fdf4ff 0%, #faf5ff 30%, #ffffff 50%, #fff1f2 80%, #fce7f3 100%);
+  background-attachment: fixed;
   color: var(--text-main);
   min-width: 320px;
   -webkit-font-smoothing: antialiased;
@@ -60,10 +67,16 @@ button {
 .login-dashboard-shell {
   min-height: 100vh;
   width: 100vw;
-  background: radial-gradient(circle at 50% 30%, #0c162c 0%, #060b17 70%, #03060c 100%);
+  background: 
+    radial-gradient(ellipse 75% 55% at 50% -5%, rgba(243, 232, 255, 0.95), transparent 70%),
+    radial-gradient(circle at 8% 25%, rgba(253, 230, 248, 0.9), transparent 45%),
+    radial-gradient(circle at 92% 25%, rgba(237, 233, 254, 0.9), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(254, 215, 239, 0.75), transparent 45%),
+    radial-gradient(circle at 18% 80%, rgba(233, 213, 255, 0.75), transparent 45%),
+    linear-gradient(135deg, #fdf4ff 0%, #faf5ff 30%, #ffffff 50%, #fff1f2 80%, #fce7f3 100%);
   display: flex;
   flex-direction: column;
-  color: #fff;
+  color: #0f172a;
   position: relative;
   overflow-x: hidden;
   font-family: var(--font-body);
@@ -2342,16 +2355,98 @@ button {
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
 }
 
-/* ── Multi-Portal Landing & Selection Page ───────────────────────────────── */
+/* ── Multi-Portal Landing & Selection Page (Light Purple, White & Light Pink) ─ */
 
 .landing-portal-shell {
   min-height: 100vh;
-  background: radial-gradient(circle at 50% 10%, #0f172a 0%, #090d16 100%);
-  color: #fff;
+  position: relative;
+  overflow-x: hidden;
+  background: 
+    radial-gradient(ellipse 75% 55% at 50% -5%, rgba(243, 232, 255, 0.95), transparent 70%),
+    radial-gradient(circle at 8% 25%, rgba(253, 230, 248, 0.9), transparent 45%),
+    radial-gradient(circle at 92% 25%, rgba(237, 233, 254, 0.9), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(254, 215, 239, 0.75), transparent 45%),
+    radial-gradient(circle at 18% 80%, rgba(233, 213, 255, 0.75), transparent 45%),
+    linear-gradient(135deg, #fdf4ff 0%, #faf5ff 30%, #ffffff 50%, #fff1f2 80%, #fce7f3 100%);
+  color: #0f172a;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 40px min(60px, 5vw);
+}
+
+/* Ambient Pastel Animated Glow Mesh Orbs */
+.ambient-pastel-mesh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.pastel-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.75;
+  animation: orbFloat 16s ease-in-out infinite alternate;
+}
+
+.orb-purple {
+  width: 520px;
+  height: 520px;
+  top: -100px;
+  left: -80px;
+  background: radial-gradient(circle, #e9d5ff 0%, #d8b4fe 65%, transparent 80%);
+}
+
+.orb-pink {
+  width: 580px;
+  height: 580px;
+  bottom: -100px;
+  right: -80px;
+  background: radial-gradient(circle, #fce7f3 0%, #fbcfe8 65%, transparent 80%);
+  animation-delay: -6s;
+  animation-duration: 18s;
+}
+
+.orb-white {
+  width: 650px;
+  height: 650px;
+  top: 25%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(253, 244, 255, 0.75) 60%, transparent 80%);
+  animation-delay: -9s;
+  animation-duration: 20s;
+}
+
+.orb-lavender {
+  width: 440px;
+  height: 440px;
+  top: 60%;
+  left: 5%;
+  background: radial-gradient(circle, #ede9fe 0%, #ddd6fe 60%, transparent 80%);
+  animation-delay: -4s;
+  animation-duration: 15s;
+}
+
+@keyframes orbFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(35px, -30px) scale(1.08);
+  }
+  100% {
+    transform: translate(-25px, 25px) scale(0.95);
+  }
+}
+
+.landing-header,
+.landing-hero-content,
+.landing-footer {
+  position: relative;
+  z-index: 1;
 }
 
 .landing-header {
@@ -2366,6 +2461,39 @@ button {
   gap: 12px;
 }
 
+.landing-brand .brand-mark-glowing {
+  box-shadow: 0 4px 18px rgba(6, 182, 212, 0.35);
+}
+
+.landing-brand .brand-text {
+  color: #0f172a;
+}
+
+.landing-brand .cyan-highlight {
+  color: #0284c7;
+}
+
+.landing-brand .brand-subtext {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.system-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.85);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.08);
+}
+
 .landing-hero-content {
   max-width: 1200px;
   margin: 40px auto;
@@ -2377,32 +2505,39 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(6, 182, 212, 0.12);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(6, 182, 212, 0.3);
-  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #7c3aed;
+  border: 1px solid rgba(192, 132, 252, 0.5);
+  padding: 7px 18px;
   border-radius: 20px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .landing-hero-title {
   font-family: var(--font-heading);
   font-size: clamp(28px, 4vw, 44px);
-  font-weight: 800;
+  font-weight: 850;
   margin-bottom: 14px;
-  background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+  background: linear-gradient(135deg, #1e1b4b 0%, #3b0764 45%, #701a75 75%, #831843 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
 }
 
 .landing-hero-subtitle {
-  color: var(--text-muted);
+  color: #475569;
   font-size: 15px;
   max-width: 720px;
   margin: 0 auto 48px;
   line-height: 1.6;
+  font-weight: 450;
 }
 
 .portal-cards-grid {
@@ -2413,22 +2548,25 @@ button {
 }
 
 .portal-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 30px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px -5px rgba(147, 51, 234, 0.08), 0 0 0 1px rgba(233, 213, 255, 0.5);
 }
 
 .portal-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(6, 182, 212, 0.5);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 24px 50px -12px rgba(147, 51, 234, 0.2), 0 0 0 1.5px rgba(192, 132, 252, 0.5);
 }
 
 .card-badge {
@@ -2443,21 +2581,22 @@ button {
   margin-bottom: 20px;
 }
 
-.doctor-badge { background: rgba(6, 182, 212, 0.15); color: #06b6d4; border: 1px solid rgba(6, 182, 212, 0.3); }
-.hospital-badge { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
-.lab-badge { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+.doctor-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; border: 1px solid rgba(2, 132, 199, 0.25); }
+.hospital-badge { background: rgba(124, 58, 237, 0.1); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.25); }
+.lab-badge { background: rgba(217, 119, 6, 0.1); color: #b45309; border: 1px solid rgba(217, 119, 6, 0.25); }
 
 .card-body h2 {
   font-family: var(--font-heading);
-  font-size: 20px;
-  color: #fff;
+  font-size: 21px;
+  color: #0f172a;
   margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .card-body p {
-  color: var(--text-muted);
+  color: #475569;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
   margin-bottom: 20px;
 }
 
@@ -2474,9 +2613,14 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
-  color: var(--text-dim);
+  font-size: 12.5px;
+  color: #334155;
+  font-weight: 500;
 }
+
+.doctor-card .portal-feature-list li svg { color: #0284c7; }
+.hospital-card .portal-feature-list li svg { color: #7c3aed; }
+.lab-card .portal-feature-list li svg { color: #ea580c; }
 
 .portal-login-btn {
   width: 100%;
@@ -2492,13 +2636,29 @@ button {
   transition: all 0.2s ease;
 }
 
-.doctor-btn { background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; }
-.hospital-btn { background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff; }
-.lab-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
+.doctor-btn {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.35);
+}
+.hospital-btn {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.35);
+}
+.lab-btn {
+  background: linear-gradient(135deg, #ea580c 0%, #d97706 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px -4px rgba(234, 88, 12, 0.35);
+}
 
-.portal-login-btn:hover { opacity: 0.92; filter: brightness(1.1); }
+.portal-login-btn:hover {
+  opacity: 0.95;
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
 
-/* ── Portal Login Shells ─────────────────────────────────────────────────── */
+/* ── Portal Login Shells (Light Purple, White & Light Pink) ─────────────── */
 
 .portal-login-container {
   min-height: 100vh;
@@ -2506,34 +2666,56 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 60%, #090d16 100%);
+  background: 
+    radial-gradient(ellipse 75% 55% at 50% -5%, rgba(243, 232, 255, 0.95), transparent 70%),
+    radial-gradient(circle at 8% 25%, rgba(253, 230, 248, 0.9), transparent 45%),
+    radial-gradient(circle at 92% 25%, rgba(237, 233, 254, 0.9), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(254, 215, 239, 0.75), transparent 45%),
+    radial-gradient(circle at 18% 80%, rgba(233, 213, 255, 0.75), transparent 45%),
+    linear-gradient(135deg, #fdf4ff 0%, #faf5ff 30%, #ffffff 50%, #fff1f2 80%, #fce7f3 100%);
   padding: 20px;
   position: relative;
+  overflow: hidden;
 }
 
-.back-landing-btn {
+.portal-login-container .back-landing-btn {
   position: absolute;
   top: 30px;
   left: 30px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(233, 213, 255, 0.6);
+  color: #475569;
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 12px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.06);
 }
 
-.login-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+.portal-login-container .back-landing-btn:hover {
+  background: #ffffff;
+  color: #0f172a;
+  transform: translateX(-3px);
+  box-shadow: 0 6px 16px rgba(147, 51, 234, 0.12);
+}
+
+.portal-login-container .login-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   width: min(440px, 92vw);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  padding: 34px;
+  box-shadow: 0 25px 60px -15px rgba(147, 51, 234, 0.15), 0 0 0 1px rgba(233, 213, 255, 0.6);
+  color: #0f172a;
 }
 
 .portal-shield-icon {
@@ -2545,20 +2727,22 @@ button {
   margin-bottom: 20px;
 }
 
-.doctor-icon-wrap { background: rgba(6, 182, 212, 0.15); color: #06b6d4; }
-.hospital-icon-wrap { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
-.lab-icon-wrap { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.doctor-icon-wrap { background: rgba(2, 132, 199, 0.12); color: #0284c7; }
+.hospital-icon-wrap { background: rgba(124, 58, 237, 0.12); color: #7c3aed; }
+.lab-icon-wrap { background: rgba(217, 119, 6, 0.12); color: #d97706; }
 
 .login-card-header h2 {
   font-family: var(--font-heading);
-  font-size: 20px;
-  color: #fff;
+  font-size: 22px;
+  color: #0f172a;
   margin-bottom: 6px;
+  font-weight: 700;
 }
 
 .login-card-header p {
-  color: var(--text-muted);
-  font-size: 12px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
   margin-bottom: 24px;
 }
 
@@ -2568,68 +2752,72 @@ button {
   gap: 16px;
 }
 
-.input-field label {
+.portal-login-container .input-field label {
   display: block;
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #334155;
   margin-bottom: 6px;
 }
 
-.input-wrap {
+.portal-login-container .input-wrap {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.input-wrap input {
+.portal-login-container .input-wrap input {
   width: 100%;
   padding: 10px 12px 10px 36px;
-  background: var(--bg-dark);
-  border: 1px solid var(--border-color);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
-  color: #fff;
+  color: #0f172a;
   font-size: 13px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
-.input-wrap input:focus {
+.portal-login-container .input-wrap input:focus {
   outline: none;
-  border-color: var(--accent-cyan);
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
 }
 
-.input-icon {
+.portal-login-container .input-icon {
   position: absolute;
   left: 10px;
-  color: var(--text-dim);
+  color: #64748b;
 }
 
-.pw-toggle-btn {
+.portal-login-container .pw-toggle-btn {
   position: absolute;
   right: 10px;
   background: none;
   border: 0;
-  color: var(--text-dim);
+  color: #64748b;
   cursor: pointer;
 }
 
-.form-options {
+.portal-login-container .form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
+  color: #475569;
 }
 
-.checkbox-wrap {
+.portal-login-container .checkbox-wrap {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--text-muted);
+  color: #475569;
 }
 
-.forgot-btn {
+.portal-login-container .forgot-btn {
   background: none;
   border: 0;
-  color: var(--accent-cyan);
+  color: #7c3aed;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -2648,24 +2836,37 @@ button {
   margin-top: 8px;
 }
 
-.doctor-submit-btn { background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; }
-.hospital-submit-btn { background: linear-gradient(135deg, #3b82f6, #6366f1); color: #fff; }
-.lab-submit-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
+.doctor-submit-btn {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.35);
+}
+.hospital-submit-btn {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.35);
+}
+.lab-submit-btn {
+  background: linear-gradient(135deg, #ea580c 0%, #d97706 100%);
+  color: #fff;
+  box-shadow: 0 8px 20px -4px rgba(234, 88, 12, 0.35);
+}
 
-.login-card-foot {
+.portal-login-container .login-card-foot {
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(233, 213, 255, 0.6);
   text-align: center;
   font-size: 11px;
-  color: var(--text-dim);
+  color: #64748b;
 }
 
 .landing-footer {
   text-align: center;
-  font-size: 11px;
-  color: var(--text-dim);
+  font-size: 12px;
+  color: #64748b;
   padding-top: 40px;
+  font-weight: 500;
 }
 
 /* ==========================================================================
