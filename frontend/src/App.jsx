@@ -296,7 +296,7 @@ export default function App({ initialUser, onLogout }) {
               <Bell size={18} /><i />
             </button>
             <div className="header-divider" />
-            <div className="profile-mini" style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#fff', fontSize: '12px' }}>
+            <div className="profile-mini" style={{ display: 'flex', gap: '8px', alignItems: 'center', color: '#1e1b4b', fontSize: '12px' }}>
               <div className="avatar doctor">RC</div>
               <span>Dr. Chen</span>
               <ChevronDown size={14} />
@@ -392,7 +392,7 @@ function OverviewPage({ patients, range, setRange, onSelect, onNav, onNotice, on
       <section className="alert-banner" style={{ borderLeftColor: '#ee4c2c' }}>
         <div className="alert-icon" style={{ background: 'rgba(238, 76, 44, 0.15)', color: '#ee4c2c' }}><ShieldCheck size={20} /></div>
         <div>
-          <strong style={{ color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <strong style={{ color: '#1e1b4b', display: 'flex', alignItems: 'center', gap: '8px' }}>
             PyTorch Deep Learning Engine & Clinical Models Calibrated
             <span style={{ background: 'rgba(238, 76, 44, 0.2)', color: '#ee4c2c', border: '1px solid rgba(238, 76, 44, 0.4)', borderRadius: '4px', fontSize: '10px', padding: '2px 6px', fontWeight: 'bold' }}>PyTorch 2.2 CUDA</span>
           </strong>
@@ -1243,7 +1243,7 @@ function LIRADSPage({ onNotice }) {
               <div className={`lirads-badge ${result.color}`}>
                 {result.category}
               </div>
-              <h2 style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', color: '#fff', margin: '8px 0' }}>
+              <h2 style={{ fontSize: '24px', fontFamily: 'var(--font-heading)', color: '#1e1b4b', margin: '8px 0' }}>
                 {result.title}
               </h2>
               <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.6', margin: '12px 0 20px' }}>
@@ -1253,10 +1253,10 @@ function LIRADSPage({ onNotice }) {
                 <strong style={{ color: 'var(--accent-cyan)', fontSize: '11px', letterSpacing: '1px', display: 'block', marginBottom: '4px' }}>
                   CLINICAL RECOMMENDATION
                 </strong>
-                <span style={{ fontSize: '13px', color: '#fff' }}>{result.recommendation}</span>
+                <span style={{ fontSize: '13px', color: '#1e1b4b' }}>{result.recommendation}</span>
               </div>
               <div style={{ fontSize: '12px', color: 'var(--text-dim)' }}>
-                Estimated HCC Probability: <b style={{ color: '#fff' }}>{Math.round(result.hcc_probability * 100)}%</b>
+                Estimated HCC Probability: <b style={{ color: '#1e1b4b' }}>{Math.round(result.hcc_probability * 100)}%</b>
               </div>
             </div>
           )}
@@ -1270,14 +1270,14 @@ function LIRADSPage({ onNotice }) {
 
 function CtRepositoryModal({ onClose, onSelect }) {
   return (
-    <div className="patient-modal-backdrop" onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(9, 13, 22, 0.85)', backdropFilter: 'blur(6px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      <div className="patient-modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '820px', width: '100%', maxHeight: '90vh', overflowY: 'auto', background: '#0f172a', border: '1px solid #1e293b', borderRadius: '14px', padding: '24px', position: 'relative' }}>
-        <button className="modal-close" onClick={onClose} style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}><X size={20} /></button>
+    <div className="patient-modal-backdrop" onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(224, 242, 254, 0.75)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+      <div className="patient-modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '820px', width: '100%', maxHeight: '90vh', overflowY: 'auto', background: '#ffffff', border: '1px solid rgba(186, 230, 253, 0.85)', borderRadius: '14px', padding: '24px', position: 'relative', boxShadow: '0 20px 60px rgba(186, 230, 253, 0.45)' }}>
+        <button className="modal-close" onClick={onClose} style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#64748b', cursor: 'pointer' }}><X size={20} /></button>
         <div style={{ marginBottom: '20px' }}>
-          <div className="eyebrow" style={{ color: '#06b6d4' }}>
-            <span className="pulse-dot" style={{ background: '#06b6d4' }} /> IN-APP PATIENT CT IMAGE REPOSITORY (PACS VAULT)
+          <div className="eyebrow" style={{ color: '#0284c7' }}>
+            <span className="pulse-dot" style={{ background: '#0284c7' }} /> IN-APP PATIENT CT IMAGE REPOSITORY (PACS VAULT)
           </div>
-          <h2 style={{ fontSize: '22px', fontFamily: 'var(--font-heading)', color: '#fff', margin: '4px 0' }}>
+          <h2 style={{ fontSize: '22px', fontFamily: 'var(--font-heading)', color: '#1e1b4b', margin: '4px 0' }}>
             Select Patient CT Scan
           </h2>
           <p style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
@@ -1312,7 +1312,7 @@ function CtRepositoryModal({ onClose, onSelect }) {
                   />
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                      <strong style={{ color: '#fff', fontSize: '15px' }}>{pt.name}</strong>
+                      <strong style={{ color: '#1e1b4b', fontSize: '15px' }}>{pt.name}</strong>
                       <span style={{
                         fontSize: '10px',
                         fontWeight: 'bold',
@@ -1392,7 +1392,7 @@ function CTVaultPage({ onNotice, onSelectScan }) {
                 key={g}
                 className={genderFilter === g ? 'selected' : ''}
                 onClick={() => setGenderFilter(g)}
-                style={{ color: genderFilter === g ? (g === 'Female' ? '#ec4899' : g === 'Male' ? '#06b6d4' : '#fff') : undefined }}
+                style={{ color: genderFilter === g ? (g === 'Female' ? '#ec4899' : g === 'Male' ? '#0284c7' : '#0284c7') : undefined }}
               >
                 {g === 'Male' ? '♂ Male' : g === 'Female' ? '♀ Female' : 'All Genders'}
               </button>
@@ -1414,7 +1414,7 @@ function CTVaultPage({ onNotice, onSelectScan }) {
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                    <h2 style={{ fontSize: '17px', color: '#fff' }}>{pt.name}</h2>
+                    <h2 style={{ fontSize: '17px', color: '#1e1b4b' }}>{pt.name}</h2>
                     <span style={{
                       fontSize: '11px',
                       fontWeight: 'bold',
@@ -1626,11 +1626,11 @@ function DoctorConsultPage({ onNotice }) {
       <div style={{ background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(16, 185, 129, 0.08))', border: '1px solid rgba(6, 182, 212, 0.35)', borderRadius: '12px', padding: '16px 20px', marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(6, 182, 212, 0.2)', color: '#06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(2, 132, 199, 0.12)', color: '#0284c7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Smartphone size={20} />
             </div>
             <div>
-              <strong style={{ color: '#fff', fontSize: '14px', display: 'block' }}>
+              <strong style={{ color: '#1e1b4b', fontSize: '14px', display: 'block' }}>
                 Dispatch Case Consultation to Clinician Mobile Phone
               </strong>
               <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
@@ -1644,15 +1644,15 @@ function DoctorConsultPage({ onNotice }) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-dark)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0 12px', height: '38px' }}>
-            <Phone size={15} style={{ color: '#06b6d4', marginRight: '8px' }} />
+          <div style={{ display: 'flex', alignItems: 'center', background: '#ffffff', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0 12px', height: '38px' }}>
+            <Phone size={15} style={{ color: '#0284c7', marginRight: '8px' }} />
             <span style={{ fontSize: '12px', color: 'var(--text-muted)', marginRight: '6px' }}>+91</span>
             <input
               type="text"
               value={phoneNo}
               onChange={e => setPhoneNo(e.target.value)}
               placeholder="Enter 10-digit mobile number"
-              style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '13px', fontWeight: 'bold', width: '130px', outline: 'none' }}
+              style={{ background: 'transparent', border: 'none', color: '#1e1b4b', fontSize: '13px', fontWeight: 'bold', width: '130px', outline: 'none' }}
             />
           </div>
 
@@ -1661,7 +1661,7 @@ function DoctorConsultPage({ onNotice }) {
             target="_blank"
             rel="noreferrer"
             className="primary-button"
-            style={{ background: '#25D366', borderColor: '#25D366', color: '#fff', textDecoration: 'none', height: '38px', padding: '0 16px', display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '12px' }}
+            style={{ background: '#10b981', borderColor: '#10b981', color: '#ffffff', textDecoration: 'none', height: '38px', padding: '0 16px', display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '12px' }}
             onClick={handleMobileDispatch}
           >
             <Send size={15} /> Open WhatsApp Chat (+91 {phoneNo})
@@ -1670,7 +1670,7 @@ function DoctorConsultPage({ onNotice }) {
           <a
             href={smsUrl}
             className="outline-button"
-            style={{ color: '#fff', textDecoration: 'none', height: '38px', padding: '0 14px', display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '12px' }}
+            style={{ color: '#0284c7', textDecoration: 'none', height: '38px', padding: '0 14px', display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '12px' }}
             onClick={handleMobileDispatch}
           >
             <Smartphone size={15} /> Send SMS Direct Link
@@ -1688,7 +1688,7 @@ function DoctorConsultPage({ onNotice }) {
       </div>
 
       {/* Patient Case Selector Header Bar */}
-      <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '16px 20px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+      <div style={{ background: '#ffffff', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '16px 20px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: 'bold' }}>ATTACHED PATIENT CASE:</span>
           <select
@@ -1700,7 +1700,7 @@ function DoctorConsultPage({ onNotice }) {
                 onNotice(`Attached case: ${pt.name} (${pt.gender} · ${pt.stage})`)
               }
             }}
-            style={{ background: 'var(--bg-dark)', color: '#fff', border: '1px solid var(--border-color)', padding: '8px 14px', borderRadius: '8px', fontSize: '13px', fontWeight: 'bold' }}
+            style={{ background: '#f0f9ff', color: '#1e1b4b', border: '1px solid var(--border-color)', padding: '8px 14px', borderRadius: '8px', fontSize: '13px', fontWeight: 'bold' }}
           >
             {PATIENT_CT_REPOSITORY.map(pt => (
               <option key={pt.id} value={pt.id}>
@@ -1723,7 +1723,7 @@ function DoctorConsultPage({ onNotice }) {
       <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '20px' }}>
         {/* Left Specialist Peer Roster */}
         <div className="panel" style={{ padding: '16px' }}>
-          <h3 style={{ fontSize: '13px', color: '#fff', marginBottom: '14px', letterSpacing: '0.5px' }}>
+          <h3 style={{ fontSize: '13px', color: '#1e1b4b', marginBottom: '14px', letterSpacing: '0.5px' }}>
             PEER SPECIALISTS & CO-COUNSEL
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -1737,8 +1737,8 @@ function DoctorConsultPage({ onNotice }) {
                     onNotice(`Consulting with ${doc.name}`)
                   }}
                   style={{
-                    background: isSelected ? 'rgba(6, 182, 212, 0.12)' : 'var(--bg-dark)',
-                    border: `1px solid ${isSelected ? 'rgba(6, 182, 212, 0.4)' : 'var(--border-color)'}`,
+                    background: isSelected ? 'rgba(2, 132, 199, 0.1)' : '#ffffff',
+                    border: `1px solid ${isSelected ? 'rgba(2, 132, 199, 0.4)' : 'var(--border-color)'}`,
                     borderRadius: '10px',
                     padding: '12px',
                     cursor: 'pointer',
@@ -1746,11 +1746,11 @@ function DoctorConsultPage({ onNotice }) {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: doc.tone, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '12px' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: doc.tone, color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '12px' }}>
                       {doc.avatar}
                     </div>
                     <div style={{ flex: 1 }}>
-                      <strong style={{ color: '#fff', fontSize: '13px', display: 'block' }}>{doc.name}</strong>
+                      <strong style={{ color: '#1e1b4b', fontSize: '13px', display: 'block' }}>{doc.name}</strong>
                       <small style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{doc.title}</small>
                     </div>
                   </div>
@@ -1758,7 +1758,7 @@ function DoctorConsultPage({ onNotice }) {
                     <span style={{ fontSize: '10px', color: doc.status === 'Online' ? '#10b981' : doc.status === 'Active Bot' ? '#ee4c2c' : '#f59e0b', fontWeight: 'bold' }}>
                       ● {doc.status}
                     </span>
-                    {isSelected && <span style={{ fontSize: '10px', color: '#06b6d4', fontWeight: 'bold' }}>Selected</span>}
+                    {isSelected && <span style={{ fontSize: '10px', color: '#0284c7', fontWeight: 'bold' }}>Selected</span>}
                   </div>
                 </div>
               )
@@ -1770,7 +1770,7 @@ function DoctorConsultPage({ onNotice }) {
         <div className="panel" style={{ display: 'flex', flexDirection: 'column', height: '620px', padding: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '14px', marginBottom: '16px' }}>
             <div>
-              <strong style={{ color: '#fff', fontSize: '16px' }}>Consulting: {activeRecipient}</strong>
+              <strong style={{ color: '#1e1b4b', fontSize: '16px' }}>Consulting: {activeRecipient}</strong>
               <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Case: {selectedCase.name} ({selectedCase.stage})</div>
             </div>
             <span className="risk low" style={{ fontSize: '11px', background: 'rgba(16, 185, 129, 0.12)', color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
@@ -1786,26 +1786,26 @@ function DoctorConsultPage({ onNotice }) {
                 style={{
                   alignSelf: msg.isDoctor && msg.sender.includes('Riley') ? 'flex-end' : 'flex-start',
                   maxWidth: '82%',
-                  background: msg.isDoctor && msg.sender.includes('Riley') ? 'rgba(6, 182, 212, 0.14)' : msg.isAI ? 'rgba(238, 76, 44, 0.1)' : 'var(--bg-dark)',
-                  border: `1px solid ${msg.isDoctor && msg.sender.includes('Riley') ? 'rgba(6, 182, 212, 0.35)' : msg.isAI ? 'rgba(238, 76, 44, 0.35)' : 'var(--border-color)'}`,
+                  background: msg.isDoctor && msg.sender.includes('Riley') ? 'rgba(2, 132, 199, 0.1)' : msg.isAI ? 'rgba(238, 76, 44, 0.08)' : '#f8fafc',
+                  border: `1px solid ${msg.isDoctor && msg.sender.includes('Riley') ? 'rgba(2, 132, 199, 0.3)' : msg.isAI ? 'rgba(238, 76, 44, 0.3)' : 'var(--border-color)'}`,
                   borderRadius: '12px',
                   padding: '14px'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <strong style={{ color: msg.isAI ? '#ee4c2c' : '#fff', fontSize: '12px' }}>{msg.sender}</strong>
+                  <strong style={{ color: msg.isAI ? '#ee4c2c' : '#1e1b4b', fontSize: '12px' }}>{msg.sender}</strong>
                   <span style={{ fontSize: '10px', color: 'var(--text-dim)' }}>{msg.time}</span>
                 </div>
-                <p style={{ fontSize: '13px', color: '#e2e8f0', lineHeight: '1.6', margin: 0 }}>{msg.text}</p>
+                <p style={{ fontSize: '13px', color: '#1e293b', lineHeight: '1.6', margin: 0 }}>{msg.text}</p>
                 {msg.citation && (
-                  <div style={{ marginTop: '8px', fontSize: '11px', color: '#06b6d4', fontWeight: 'bold', background: 'rgba(6, 182, 212, 0.1)', padding: '4px 8px', borderRadius: '4px', display: 'inline-block' }}>
+                  <div style={{ marginTop: '8px', fontSize: '11px', color: '#0284c7', fontWeight: 'bold', background: 'rgba(2, 132, 199, 0.08)', padding: '4px 8px', borderRadius: '4px', display: 'inline-block' }}>
                     📖 Citation: {msg.citation}
                   </div>
                 )}
               </div>
             ))}
             {loading && (
-              <div style={{ alignSelf: 'flex-start', color: '#06b6d4', fontSize: '12px', fontStyle: 'italic' }}>
+              <div style={{ alignSelf: 'flex-start', color: '#0284c7', fontSize: '12px', fontStyle: 'italic' }}>
                 {activeRecipient} is reviewing case details and guidelines…
               </div>
             )}
@@ -1831,7 +1831,7 @@ function DoctorConsultPage({ onNotice }) {
               value={inputMsg}
               onChange={e => setInputMsg(e.target.value)}
               placeholder={`Ask ${activeRecipient} a question about ${selectedCase.name}'s treatment or CT findings…`}
-              style={{ flex: 1, background: 'var(--bg-dark)', color: '#fff', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px 16px', fontSize: '13px' }}
+              style={{ flex: 1, background: '#ffffff', color: '#1e1b4b', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px 16px', fontSize: '13px' }}
             />
             <button className="primary-button" type="submit" disabled={loading || !inputMsg.trim()}>
               <Mail size={16} /> Send Doubt
@@ -1879,12 +1879,12 @@ function PatientsPage({ patients, onSelect, onNotice, onRefresh }) {
 
       {/* Cohort Demographic Separation Cards */}
       <div className="scores-grid" style={{ gridTemplateColumns: '1fr 1fr', marginBottom: '20px' }}>
-        <div className="score-card" style={{ background: 'rgba(6, 182, 212, 0.08)', borderColor: 'rgba(6, 182, 212, 0.3)' }}>
+        <div className="score-card" style={{ background: 'rgba(2, 132, 199, 0.08)', borderColor: 'rgba(186, 230, 253, 0.8)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span className="score-card-label" style={{ color: 'var(--accent-cyan)' }}>♂ MALE PATIENT COHORT</span>
+            <span className="score-card-label" style={{ color: '#0284c7' }}>♂ MALE PATIENT COHORT</span>
             <span className="risk high" style={{ fontSize: '10px' }}>{maleHighRisk} High Risk</span>
           </div>
-          <strong className="score-card-value" style={{ color: '#fff' }}>{maleCount} Patients</strong>
+          <strong className="score-card-value" style={{ color: '#1e1b4b' }}>{maleCount} Patients</strong>
           <span className="score-card-desc">Monitored male liver disease cohort</span>
         </div>
 
@@ -1893,7 +1893,7 @@ function PatientsPage({ patients, onSelect, onNotice, onRefresh }) {
             <span className="score-card-label" style={{ color: '#ec4899' }}>♀ FEMALE PATIENT COHORT</span>
             <span className="risk high" style={{ fontSize: '10px' }}>{femaleHighRisk} High Risk</span>
           </div>
-          <strong className="score-card-value" style={{ color: '#fff' }}>{femaleCount} Patients</strong>
+          <strong className="score-card-value" style={{ color: '#1e1b4b' }}>{femaleCount} Patients</strong>
           <span className="score-card-desc">Monitored female liver disease cohort</span>
         </div>
       </div>
@@ -1919,7 +1919,7 @@ function PatientsPage({ patients, onSelect, onNotice, onRefresh }) {
                   className={gender === g ? 'selected' : ''}
                   onClick={() => setGender(g)}
                   style={{
-                    color: gender === g ? (g === 'Female' ? '#ec4899' : g === 'Male' ? '#06b6d4' : '#fff') : undefined
+                    color: gender === g ? (g === 'Female' ? '#ec4899' : g === 'Male' ? '#0284c7' : '#0284c7') : undefined
                   }}
                 >
                   {g === 'Male' ? '♂ Male' : g === 'Female' ? '♀ Female' : 'All Genders'}
@@ -1997,7 +1997,7 @@ function IntakeModal({ onClose, onSuccess }) {
     <div className="modal-backdrop" onClick={onClose}>
       <div className="patient-modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '620px' }}>
         <button className="modal-close" onClick={onClose}><X size={18} /></button>
-        <h2 style={{ fontSize: '22px', fontFamily: 'var(--font-heading)', color: '#fff', marginBottom: '6px' }}>
+        <h2 style={{ fontSize: '22px', fontFamily: 'var(--font-heading)', color: '#1e1b4b', marginBottom: '6px' }}>
           New Patient Intake
         </h2>
         <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '20px' }}>
@@ -2189,7 +2189,7 @@ function PatientModal({ patient, onClose, onNotice, onViewTimeline }) {
         </div>
 
         <div style={{ marginTop: '16px' }}>
-          <h3 style={{ fontSize: '13px', color: '#fff', marginBottom: '8px' }}>Clinical Notes & Observations</h3>
+          <h3 style={{ fontSize: '13px', color: '#1e1b4b', marginBottom: '8px' }}>Clinical Notes & Observations</h3>
           <div style={{ background: 'var(--bg-dark)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px', fontSize: '12px', color: 'var(--text-muted)', marginBottom: '12px' }}>
             {history?.notes?.[0] || 'Chronic Hepatitis B patient with 2.4cm Segment VI observation.'}
           </div>
@@ -2220,22 +2220,22 @@ function TrendChart({ weeks, risk, afp }) {
     <svg viewBox={`0 0 ${W} ${H}`} className="trend-svg" role="img" aria-label="Risk trend over 6 weeks">
       <defs>
         <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#06b6d4" stopOpacity="0.25" />
-          <stop offset="1" stopColor="#06b6d4" stopOpacity="0" />
+          <stop offset="0" stopColor="#0284c7" stopOpacity="0.25" />
+          <stop offset="1" stopColor="#0284c7" stopOpacity="0" />
         </linearGradient>
       </defs>
       {[0.25, 0.5, 0.75, 1].map(v => (
-        <line key={v} x1={pad.l} x2={W - pad.r} y1={pad.t + iH - v * iH} y2={pad.t + iH - v * iH} stroke="#1f293d" strokeWidth="1" />
+        <line key={v} x1={pad.l} x2={W - pad.r} y1={pad.t + iH - v * iH} y2={pad.t + iH - v * iH} stroke="rgba(186, 230, 253, 0.7)" strokeWidth="1" />
       ))}
       <path d={area} fill="url(#trendFill)" />
-      <polyline points={pts} fill="none" stroke="#06b6d4" strokeWidth="2.5" strokeLinejoin="round" />
+      <polyline points={pts} fill="none" stroke="#0284c7" strokeWidth="2.5" strokeLinejoin="round" />
       {xs.map((x, i) => (
-        <circle key={i} cx={x} cy={ys[i]} r="3.5" fill="#06b6d4" stroke="#fff" strokeWidth="1.5">
+        <circle key={i} cx={x} cy={ys[i]} r="3.5" fill="#0284c7" stroke="#fff" strokeWidth="1.5">
           <title>{weeks[i]}: {Math.round(risk[i] * 100)}%</title>
         </circle>
       ))}
       {weeks.map((w, i) => (
-        <text key={i} x={xs[i]} y={H - 6} textAnchor="middle" fontSize="9" fill="#9ca3af">{w}</text>
+        <text key={i} x={xs[i]} y={H - 6} textAnchor="middle" fontSize="9" fill="#64748b" fontWeight="600">{w}</text>
       ))}
     </svg>
   )
@@ -2283,14 +2283,14 @@ function ReportsPage({ onNotice }) {
     <>
       <section className="page-intro">
         <div>
-          <div className="eyebrow" style={{ color: '#06b6d4' }}>
-            <span className="pulse-dot" style={{ background: '#06b6d4' }} /> LANGCHAIN RAG PIPELINE FRAMEWORK · KNOWLEDGE GROUNDING
+          <div className="eyebrow" style={{ color: '#0284c7' }}>
+            <span className="pulse-dot" style={{ background: '#0284c7' }} /> LANGCHAIN RAG PIPELINE FRAMEWORK · KNOWLEDGE GROUNDING
           </div>
           <h1>LangChain Knowledge-Grounded Report Generator</h1>
           <p>LangChain RetrievalQA document chains grounded in AASLD 2023, EASL, ACR LI-RADS v2018, and AJCC 8th Ed.</p>
         </div>
         <div style={{ display: 'flex', gap: '10px' }}>
-          <div className="range-select" style={{ background: 'var(--bg-dark)' }}>
+          <div className="range-select" style={{ background: '#f0f9ff' }}>
             <button className={mode === 'langchain' ? 'selected' : ''} onClick={() => setMode('langchain')}>
               LangChain RAG
             </button>
@@ -2305,11 +2305,11 @@ function ReportsPage({ onNotice }) {
       </section>
 
       {/* RAG Knowledge-Grounded Report Output */}
-      <section className="panel" style={{ marginBottom: '24px', background: 'rgba(6, 182, 212, 0.04)', borderColor: 'rgba(6, 182, 212, 0.3)' }}>
+      <section className="panel" style={{ marginBottom: '24px', background: 'rgba(2, 132, 199, 0.04)', borderColor: 'rgba(186, 230, 253, 0.8)' }}>
         <div className="panel-heading">
           <div>
-            <h2 style={{ color: '#fff', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <FileText size={18} style={{ color: '#06b6d4' }} /> Grounded Clinical Summary & Recommendations
+            <h2 style={{ color: '#1e1b4b', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <FileText size={18} style={{ color: '#0284c7' }} /> Grounded Clinical Summary & Recommendations
             </h2>
             <p>Knowledge-grounded synthesis with zero hallucination verification</p>
           </div>
@@ -2317,13 +2317,13 @@ function ReportsPage({ onNotice }) {
             <span className="risk low" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.4)' }}>
               ✓ Grounded in AASLD 2023 & LI-RADS v2018
             </span>
-            <span className="scan-status" style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#06b6d4', borderColor: 'rgba(6, 182, 212, 0.4)' }}>
+            <span className="scan-status" style={{ background: 'rgba(2, 132, 199, 0.12)', color: '#0284c7', borderColor: 'rgba(186, 230, 253, 0.8)' }}>
               Confidence: 94.2%
             </span>
           </div>
         </div>
 
-        <div style={{ background: 'var(--bg-dark)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '20px', fontFamily: 'monospace', fontSize: '13px', color: '#e2e8f0', lineHeight: '1.7', whiteSpace: 'pre-wrap', marginBottom: '20px' }}>
+        <div style={{ background: '#ffffff', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '20px', fontFamily: 'monospace', fontSize: '13px', color: '#1e293b', lineHeight: '1.7', whiteSpace: 'pre-wrap', marginBottom: '20px' }}>
           {ragReport ? ragReport.grounded_narrative : (
             `PATIENT CLINICAL SUMMARY & RAG KNOWLEDGE-GROUNDED REPORT
 Patient: James Morrison | Age: 58 | Gender: Male | MRN: MRN-88401
@@ -2379,7 +2379,7 @@ ConvNeXt-Small multi-class pathology classifier confirms Hepatocellular Carcinom
             ].map(g => (
               <div key={g.id} style={{ background: 'var(--bg-dark)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '14px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <strong style={{ color: '#fff', fontSize: '13px' }}>{g.name}</strong>
+                  <strong style={{ color: '#1e1b4b', fontSize: '13px' }}>{g.name}</strong>
                   <span className="risk low" style={{ fontSize: '11px', background: 'rgba(6, 182, 212, 0.12)', color: '#06b6d4', borderColor: 'rgba(6, 182, 212, 0.3)' }}>{g.sim}</span>
                 </div>
                 <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '4px 0 8px', lineHeight: '1.5' }}>"{g.text}"</p>

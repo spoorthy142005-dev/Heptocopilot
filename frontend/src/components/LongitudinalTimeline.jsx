@@ -897,14 +897,14 @@ function BiomarkerSvgChart({ data, activeKeys }) {
       {/* Grid Lines */}
       {[0, 0.25, 0.5, 0.75, 1.0].map((frac, i) => {
         const y = padding.top + innerH * frac
-        return <line key={i} x1={padding.left} y1={y} x2={width - padding.right} y2={y} stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+        return <line key={i} x1={padding.left} y1={y} x2={width - padding.right} y2={y} stroke="rgba(186, 230, 253, 0.5)" strokeDasharray="3 3" />
       })}
 
       {/* X Axis Dates */}
       {data.map((d, idx) => {
         const x = padding.left + (idx / Math.max(1, data.length - 1)) * innerW
         return (
-          <text key={idx} x={x} y={height - 12} fill="#9ca3af" fontSize="10" textAnchor="middle">
+          <text key={idx} x={x} y={height - 12} fill="#64748b" fontSize="10" textAnchor="middle" fontWeight="600">
             {d.date}
           </text>
         )
@@ -934,8 +934,8 @@ function BiomarkerSvgChart({ data, activeKeys }) {
             <path d={pathD} fill="none" stroke={cfg.color} strokeWidth="2.5" strokeLinecap="round" />
             {points.map((p, i) => (
               <g key={i}>
-                <circle cx={p.x} cy={p.y} r="4" fill={cfg.color} stroke="#090d16" strokeWidth="2" />
-                <text x={p.x} y={p.y - 8} fill="#fff" fontSize="9" textAnchor="middle" fontWeight="bold">
+                <circle cx={p.x} cy={p.y} r="4" fill={cfg.color} stroke="#ffffff" strokeWidth="2" />
+                <text x={p.x} y={p.y - 8} fill="#1e1b4b" fontSize="9" textAnchor="middle" fontWeight="bold">
                   {p.val}
                 </text>
               </g>

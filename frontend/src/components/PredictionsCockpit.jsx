@@ -809,7 +809,7 @@ export default function PredictionsCockpit({ onNotice }) {
                     <span className="rag-pathway-badge">
                       <Stethoscope size={14} /> {rag.clinical_pathway || 'Locoregional / Systemic Therapy Pathway'}
                     </span>
-                    <h3 style={{ marginTop: '8px', color: '#fff' }}>Grounded Decision Support Summary</h3>
+                    <h3 style={{ marginTop: '8px', color: '#1e1b4b' }}>Grounded Decision Support Summary</h3>
                     <p className="rag-primary-rec">
                       <strong>Primary Recommendation:</strong> {rag.primary_recommendation || 'Multidisciplinary Tumor Board referral for transarterial chemoembolization (TACE).'}
                     </p>

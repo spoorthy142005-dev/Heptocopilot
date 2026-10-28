@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import SubsystemPerformanceCard from '../../components/SubsystemPerformanceCard'
+import DepartmentActivityTable from './DepartmentActivityTable'
 import {
   Building2, Users, Stethoscope, FlaskConical, Layers, BrainCircuit,
   BarChart2, FileText, ShieldAlert, Settings, Bell, Menu, User, LogOut,
@@ -145,61 +146,7 @@ export default function HospitalPortalLayout({ user, onLogout }) {
                 </div>
               </section>
 
-              <section className="panel" style={{ marginTop: '20px' }}>
-                <div className="panel-heading">
-                  <div>
-                    <h2>Department Activity & Capacity Roster</h2>
-                    <p>Real-time staffing, patient load, and AI assessment metrics across clinical units</p>
-                  </div>
-                </div>
-
-                <table className="patient-table">
-                  <thead>
-                    <tr>
-                      <th>Department Name</th>
-                      <th>Department Head</th>
-                      <th>Active Doctors</th>
-                      <th>Active Patients</th>
-                      <th>AI Predictions Run</th>
-                      <th>Operational Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><strong>Hepatology & Oncology</strong></td>
-                      <td>Dr. Riley Chen</td>
-                      <td>14 Clinicians</td>
-                      <td>482 Patients</td>
-                      <td>194 Runs</td>
-                      <td><span className="badge-tag green">Optimal</span></td>
-                    </tr>
-                    <tr>
-                      <td><strong>Diagnostic Radiology & PACS</strong></td>
-                      <td>Dr. Marcus Vance</td>
-                      <td>10 Radiologists</td>
-                      <td>310 Patients</td>
-                      <td>142 CT Scans</td>
-                      <td><span className="badge-tag green">Optimal</span></td>
-                    </tr>
-                    <tr>
-                      <td><strong>Clinical Pathology & Lab</strong></td>
-                      <td>Tech Alex Mercer</td>
-                      <td>8 Technicians</td>
-                      <td>386 Samples</td>
-                      <td>110 OCR Extractions</td>
-                      <td><span className="badge-tag cyan">High Throughput</span></td>
-                    </tr>
-                    <tr>
-                      <td><strong>Interventional Radiology</strong></td>
-                      <td>Dr. Elena Rostova</td>
-                      <td>6 Surgeons</td>
-                      <td>106 Procedures</td>
-                      <td>38 TACE Cases</td>
-                      <td><span className="badge-tag green">Optimal</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </section>
+              <DepartmentActivityTable onShowNotice={showNotice} />
             </>
           )}
 

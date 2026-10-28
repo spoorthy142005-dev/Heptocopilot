@@ -392,9 +392,9 @@ export default function LabPortalLayout({ user, onLogout }) {
               <div className="report-grid">
                 {/* Left Scanned PDF Document Mock */}
                 <div className="panel" style={{ padding: '20px' }}>
-                  <h3 style={{ fontSize: '14px', color: '#fff', marginBottom: '12px' }}>Original Scanned Lab Document</h3>
-                  <div style={{ background: '#0f172a', border: '1px solid var(--border-color)', height: '280px', borderRadius: '8px', padding: '16px', fontSize: '12px', color: 'var(--text-muted)' }}>
-                    <p style={{ fontWeight: 'bold', color: '#fff' }}>NORTHSTAR PATHOLOGY CLINICAL REPORT</p>
+                  <h3 style={{ fontSize: '14px', color: '#1e1b4b', marginBottom: '12px' }}>Original Scanned Lab Document</h3>
+                  <div style={{ background: '#f8fafc', border: '1px solid rgba(186, 230, 253, 0.8)', height: '280px', borderRadius: '8px', padding: '16px', fontSize: '12px', color: '#475569' }}>
+                    <p style={{ fontWeight: 'bold', color: '#1e1b4b' }}>NORTHSTAR PATHOLOGY CLINICAL REPORT</p>
                     <p>Patient: James Morrison (MRN-88401)</p>
                     <p>Test: Serum Alpha-Fetoprotein (AFP)</p>
                     <p>Result: 940 ng/mL [REF: &lt; 20 ng/mL]</p>
@@ -406,7 +406,7 @@ export default function LabPortalLayout({ user, onLogout }) {
                 {/* Right Extracted Fields */}
                 <div className="panel" style={{ padding: '20px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                    <h3 style={{ fontSize: '14px', color: '#fff' }}>AI Extracted Structured Fields</h3>
+                    <h3 style={{ fontSize: '14px', color: '#1e1b4b' }}>AI Extracted Structured Fields</h3>
                     <span className="badge-tag yellow"><AlertTriangle size={12} /> Requires Verification</span>
                   </div>
 
@@ -437,7 +437,7 @@ export default function LabPortalLayout({ user, onLogout }) {
               <section className="panel">
                 <div className="panel-heading"><h2>Pending Sign-off Requisition ORD-99482</h2></div>
                 <div style={{ padding: '16px' }}>
-                  <p style={{ fontSize: '13px', color: '#fff', marginBottom: '8px' }}>Patient: <strong>James Morrison (PT-10482)</strong> · Ordering Doctor: <strong>Dr. Riley Chen</strong></p>
+                  <p style={{ fontSize: '13px', color: '#1e1b4b', marginBottom: '8px' }}>Patient: <strong>James Morrison (PT-10482)</strong> · Ordering Doctor: <strong>Dr. Riley Chen</strong></p>
                   <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '16px' }}>Verified Values: Serum AFP 940 ng/mL, ALT 72 U/L, Albumin 3.2 g/dL, INR 1.3</p>
 
                   <div style={{ display: 'flex', gap: '12px' }}>
